@@ -87,7 +87,7 @@ class TodoManager {
     }
 }
 
-// Class responsible for managing the UI and handling events
+
 class UIManager {
   constructor(todoManager, todoItemFormatter) {
     this.todoManager = todoManager;
@@ -104,24 +104,24 @@ class UIManager {
   }
 
   addEventListeners() {
-      // Event listener for adding a new todo
+     
       this.addBtn.addEventListener("click", () => {
           this.handleAddTodo();
       });
 
-      // Event listener for pressing Enter key in the task input
+
       this.taskInput.addEventListener("keyup", (e) => {
           if (e.keyCode === 13 && this.taskInput.value.length > 0) {
               this.handleAddTodo();
           }
       });
 
-      // Event listener for deleting all todos
+      
       this.deleteAllBtn.addEventListener("click", () => {
           this.handleClearAllTodos();
       });
 
-      // Event listeners for filter buttons
+    
       const filterButtons = document.querySelectorAll(".todos-filter li");
       filterButtons.forEach((button) => {
           button.addEventListener("click", () => {
@@ -250,7 +250,7 @@ setTimeout(() => {
 }
 }
 
-// Class responsible for managing the theme switcher
+
 class ThemeSwitcher {
 constructor(themes, html) {
   this.themes = themes;
@@ -292,7 +292,7 @@ getThemeFromLocalStorage() {
 
 
 
-// Instantiating the classes
+
 const todoItemFormatter = new TodoItemFormatter();
 const todoManager = new TodoManager(todoItemFormatter);
 const uiManager = new UIManager(todoManager, todoItemFormatter);
