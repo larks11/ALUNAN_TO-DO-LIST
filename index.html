@@ -4,22 +4,60 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Todo List</title>
     <link rel="icon" href="res/favicon.ico" type="image/x-icon" />
-    
+
+  
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.18.0/dist/full.css" rel="stylesheet" />
     <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+      body {
+        background: url('res/background.jpg') center center / cover no-repeat fixed;
+        position: relative;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: -1;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          background: linear-gradient(to right, #1a1a2e, #16213e);
+        }
+
+        body::before {
+          background-color: transparent;
+        }
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      .animate-fadeIn {
+        opacity: 0;
+        animation: fadeIn 0.8s ease forwards;
+      }
+    </style>
   </head>
 
-  <body class="min-h-screen flex items-center justify-center p-4">
+ <div class="w-full max-w-2xl bg-base-200 shadow-xl rounded-2xl p-6 space-y-6 backdrop-blur-md">
+  
+
    
     <div class="absolute top-4 right-4">
       <div class="dropdown dropdown-left">
-        <label tabindex="0" class="btn btn-sm btn-accent">
-          <i class="bx bxs-palette text-lg"></i>
+        <label tabindex="0" class="btn btn-sm btn-accent gap-2 transition-transform hover:scale-105">
+          <i class="bx bxs-palette text-lg"></i> Theme
         </label>
         <ul tabindex="0" class="dropdown-content menu bg-base-100 shadow rounded-box w-48 p-2">
           <li class="theme-item" theme="light"><a>Light</a></li>
@@ -32,34 +70,39 @@
     </div>
 
     
-    <div class="w-full max-w-2xl bg-base-200 shadow-xl rounded-lg p-6 space-y-6">
-      <header class="text-center space-y-2">
-        <h1 class="text-3xl font-bold">📝 TODO LIST</h1>
+    <div class="w-full max-w-2xl bg-base-200 shadow-xl rounded-2xl p-6 space-y-6 backdrop-blur-md animate-fadeIn">
+      <header class="text-center space-y-4">
+        <h1 class="text-4xl font-extrabold text-primary">📝 TODO LIST</h1>
         <div class="alert-message"></div>
-        <div class="flex flex-col sm:flex-row gap-2">
-          <input type="text" placeholder="Add a todo..." class="input input-bordered w-full" />
+        <div class="flex flex-col sm:flex-row gap-3">
+          <input type="text" placeholder="Add a task..." class="input input-bordered w-full" />
           <input type="date" class="input input-bordered schedule-date w-full sm:max-w-[200px]" />
-          <button class="btn btn-primary add-task-button">
+          <button class="btn btn-primary add-task-button transition-transform hover:scale-105">
             <i class="bx bx-plus bx-sm"></i>
           </button>
         </div>
       </header>
 
+    
       <div class="flex justify-between items-center">
         <div class="dropdown">
-          <label tabindex="0" class="btn btn-outline btn-sm">Filter</label>
+          <label tabindex="0" class="btn btn-outline btn-sm gap-2 transition-transform hover:scale-105">
+            <i class="bx bx-filter"></i> Filter
+          </label>
           <ul tabindex="0" class="dropdown-content menu bg-base-100 shadow rounded-box w-40 p-2">
             <li onclick="filterTodos('all')"><a>All</a></li>
             <li onclick="filterTodos('pending')"><a>Pending</a></li>
             <li onclick="filterTodos('completed')"><a>Completed</a></li>
           </ul>
         </div>
-        <button class="btn btn-sm btn-error delete-all-btn">Delete All</button>
+        <button class="btn btn-sm btn-error delete-all-btn transition-transform hover:scale-105">
+          <i class="bx bx-trash"></i> Delete All
+        </button>
       </div>
 
       
-      <div class="overflow-x-auto">
-        <table class="table w-full">
+      <div class="overflow-x-auto rounded-xl">
+        <table class="table w-full table-zebra">
           <thead>
             <tr>
               <th>Task</th>
@@ -68,16 +111,31 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody class="todos-list-body"></tbody>
+          <tbody class="todos-list-body">
+            <tr class="empty-row">
+              <td colspan="4" class="text-center text-gray-400 italic py-6">No tasks yet. Add something to get started!</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
 
-    
+  
     <footer class="absolute bottom-4 left-0 right-0 text-center text-sm text-gray-400">
-      Made by: <span class="text-primary">Alunan Larkken</span>
+      Made by: <span class="text-primary font-medium">Alunan Larkken</span>
     </footer>
 
     <script src="js/main.js"></script>
+    <script>
+      
+      function checkAllCompleted() {
+        const tasks = document.querySelectorAll(".todos-list-body tr");
+        if (tasks.length > 0 && [...tasks].every(tr => tr.classList.contains("completed"))) {
+          alert("🎉 All tasks completed!");
+        }
+        <audio id="clickSound" src="res/sounds/click.mp3" preload="auto"></audio>
+
+      }
+    </script>
   </body>
 </html>
